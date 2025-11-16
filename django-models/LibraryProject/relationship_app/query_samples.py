@@ -8,7 +8,7 @@ def get_books_by_author(author_name):
     """
     try:
         author = Author.objects.get(name=author_name)
-        return author.book_set.all()
+        return Book.objects.filter(author=author)
     except Author.DoesNotExist:
         return Book.objects.none()
 
