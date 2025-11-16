@@ -2,9 +2,16 @@ from django.urls import path
 from django.views.generic import RedirectView
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import list_books, LibraryDetailView
-from .views import AdminView, LibrarianView, MemberView
-
+from .views import (
+    list_books, 
+    LibraryDetailView, 
+    AdminView, 
+    LibrarianView, 
+    MemberView, 
+    add_book, 
+    edit_book, 
+    delete_book
+)
 
 urlpatterns = [
     path("", RedirectView.as_view(url="/relationship/books/")),  
@@ -16,4 +23,7 @@ urlpatterns = [
     path("admin-view/", AdminView, name="AdminView"),
     path("librarian-view/", LibrarianView, name="LibrarianView"),
     path("member-view/", MemberView, name="MemberView"),
+    path('books/add/', add_book, name='add_book'),
+    path('books/<int:pk>/edit/', edit_book, name='edit_book'),
+    path('books/<int:pk>/delete/', delete_book, name='delete_book'),
 ]
