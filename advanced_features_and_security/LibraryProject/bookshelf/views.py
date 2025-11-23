@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import permission_required, user_passes_test
+from django.contrib.auth.decorators import permission_required, user_passes_test, login_required
 from django.views.generic.detail import DetailView
 from .models import Library, Book
 from .forms import BookForm 
@@ -100,3 +100,10 @@ def delete_book(request, pk):
         book.delete()
         return redirect('list_books')
     return render(request, 'relationship_app/delete_book.html', {'book': book})
+
+@permission_required
+def search_books(request):
+    query = request.GET.get("q", "")
+    books = Book.objects.filter(title__icontains=query)  # Safe ORM query
+    # Using Django ORM and form validation prevents SQL injection
+    return render(request, "bookshelf/book_list.html", {"books": books, "query": query})
