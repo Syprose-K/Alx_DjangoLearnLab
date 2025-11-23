@@ -3,12 +3,11 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 class UserProfile(models.Model):
     ROLE_CHOICES = [
-        ("Admin", "Admin"),
-        ("Librarian", "Librarian"),
-        ("Member", "Member"),
+        ('Admin', 'Admin'),
+        ('Librarian', 'Librarian'),
+        ('Member', 'Member'),
     ]
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
