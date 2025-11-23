@@ -4,7 +4,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required, user_passes_test, login_required
 from django.views.generic.detail import DetailView
 from .models import Library, Book
-from .forms import BookForm 
+from .forms import ExampleForm 
+
+def secure_book_form(request):
+    """
+    A view demonstrating secure handling of a form.
+    Includes CSRF protection and safe input handling.
+    """
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            form.save()  # ORM safely handles SQL injection
+            return redirect('book_list')
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/form_example.html', {'form': form})
 
 def book_list(request):
     books = Book.objects.all()
@@ -71,12 +86,12 @@ def MemberView(request):
 @permission_required('relationship_app.can_add_book', raise_exception=True)
 def add_book(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = book_list(request.POST)
         if form.is_valid():
             form.save()
             return redirect('list_books')
     else:
-        form = BookForm()
+        form = book_list()
     return render(request, 'relationship_app/add_book.html', {'form': form})
 
 # Edit Book
@@ -84,12 +99,12 @@ def add_book(request):
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
+        form = book_list(request.POST, instance=book)
         if form.is_valid():
             form.save()
             return redirect('list_books')
     else:
-        form = BookForm(instance=book)
+        form = book_list(instance=book)
     return render(request, 'relationship_app/edit_book.html', {'form': form})
 
 # Delete Book
