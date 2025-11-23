@@ -147,3 +147,13 @@ SESSION_COOKIE_HTTPONLY = True
 # CSRF_COOKIE_SECURE ensures CSRF cookies are only sent over HTTPS
 # X_FRAME_OPTIONS prevents clickjacking attacks
 # SECURE_CONTENT_TYPE_NOSNIFF prevents MIME type sniffing
+
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True  # Forces HTTPS for all requests
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # 1 year in seconds
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow domain to be preloaded in browsers
+
