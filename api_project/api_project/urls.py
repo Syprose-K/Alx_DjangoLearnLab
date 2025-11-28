@@ -21,3 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]
+#final endpoints become:
+#/api/books/ = ListAPIView (GET only)
+#/api/books_all/ = ViewSet list/create
+#/api/books_all/<id>/ = ViewSet retrieve/update/delete
