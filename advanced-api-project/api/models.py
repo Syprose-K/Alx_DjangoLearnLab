@@ -12,7 +12,7 @@ class Author(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        #helpful for debugging and admin display
+        # Helpful for debugging and admin display
         return self.name
 
 
@@ -34,9 +34,8 @@ class Book(models.Model):
     author = models.ForeignKey(
         Author,
         on_delete=models.CASCADE,
-        related_name="books",  #allows author.books.all() to get all books
+        related_name="books",  # allows author.books.all() to get all books
     )
 
     def __str__(self):
         return f"{self.title} ({self.publication_year})"
-
