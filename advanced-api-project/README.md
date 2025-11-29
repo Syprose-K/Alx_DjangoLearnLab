@@ -1,0 +1,5 @@
+GET /api/books/ – List all books (public)
+GET /api/books/<id>/ – Retrieve a single book (public)
+POST /api/books/create/ – Create a new book (authenticated only)
+PUT/PATCH /api/books/<id>/update/ – Update an existing book (authenticated only)
+DELETE /api/books/<id>/delete/ – Delete a book (authenticated only)
