@@ -6,21 +6,24 @@ from .views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
+    CommentCreateView,
+    CommentUpdateView,
+    CommentDeleteView,
 )
 
 urlpatterns = [
     path('', PostListView.as_view(), name='home'),
-    
-    # CRUD for posts
-    path('posts/', PostListView.as_view(), name='posts'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('post/<int:post_pk>/comments/new/', views.comment_create, name='comment-create'),
-    path('comment/<int:pk>/edit/', views.comment_update, name='comment-update'),
-    path('comment/<int:pk>/delete/', views.comment_delete, name='comment-delete'),
+    path('post/<int:post_pk>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
+    path('comment/<int:pk>/edit/', CommentUpdateView.as_view(), name='comment-update'),
+    path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+
     path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', views.register, name='register'),
+
 ]
 
 #POST /post/<post_pk>/comments/new/ — create comment
