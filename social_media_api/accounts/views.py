@@ -1,16 +1,18 @@
 from rest_framework import generics, permissions, serializers
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
+from .serializers import RegisterSerializer, UserSerializer
 
 User = get_user_model()
 
+class RegisterView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
-
 
 class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
@@ -26,10 +28,7 @@ class LoginView(generics.GenericAPIView):
         )
 
         if not user:
-            return Response(
-                {"error": "Invalid credentials"},
-                status=400
-            )
+            return Response({"error": "Invalid credentials"}, status=400)
 
         token, created = Token.objects.get_or_create(user=user)
 
@@ -38,3 +37,10 @@ class LoginView(generics.GenericAPIView):
             "user_id": user.id,
             "username": user.username
         })
+
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
