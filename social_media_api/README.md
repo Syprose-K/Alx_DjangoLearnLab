@@ -34,3 +34,21 @@ GET /api/posts/?search=keyword
 - DELETE /api/comments/{id}/
 
 Authentication required for all endpoints.
+
+
+## Follow System
+
+- **Follow a user**
+POST /api/accounts/follow/{user_id}/
+Authorization required
+
+- **Unfollow a user**
+POST /api/accounts/unfollow/{user_id}/
+Authorization required
+
+## Feed
+
+- **Get feed**
+GET /api/feed/
+Returns posts from users you follow, newest first.
+Authorization required
