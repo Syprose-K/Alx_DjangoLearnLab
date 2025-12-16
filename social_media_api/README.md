@@ -17,3 +17,20 @@
 - `bio`
 - `profile_picture`
 - `followers` (ManyToMany to self)
+
+## Posts
+- GET /api/posts/
+- POST /api/posts/
+- PUT /api/posts/{id}/
+- DELETE /api/posts/{id}/
+
+Supports search:
+GET /api/posts/?search=keyword
+
+## Comments
+- GET /api/comments/
+- POST /api/comments/
+- PUT /api/comments/{id}/
+- DELETE /api/comments/{id}/
+
+Authentication required for all endpoints.
