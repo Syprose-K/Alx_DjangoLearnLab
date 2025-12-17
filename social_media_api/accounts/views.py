@@ -1,3 +1,4 @@
+from .models import CustomUser
 from rest_framework import generics, permissions, serializers, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -66,6 +67,7 @@ class UnfollowUserView(generics.GenericAPIView):
 class ProfileView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    queryset = CustomUser.objects.all()
 
     def get_object(self):
         return self.request.user
