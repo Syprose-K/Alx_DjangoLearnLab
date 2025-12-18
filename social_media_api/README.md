@@ -52,3 +52,18 @@ Authorization required
 GET /api/feed/
 Returns posts from users you follow, newest first.
 Authorization required
+
+
+## Likes
+
+POST /api/posts/{id}/like/
+POST /api/posts/{id}/unlike/
+
+## Notifications
+
+GET /api/notifications/
+
+Returns recent notifications such as:
+- New followers
+- Likes on posts
+- Comments on posts
