@@ -26,7 +26,7 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'social-media-api.herokuapp.com',  # update if your app name differs
+    'social-media-api.herokuapp.com', 
 ]
 
 
