@@ -5,7 +5,6 @@ Production-ready configuration.
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # --------------------------------------------------
 # BASE
@@ -79,10 +78,16 @@ ROOT_URLCONF = 'social_media_api.urls'
 WSGI_APPLICATION = 'social_media_api._'
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
+    }
 }
+
 
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
