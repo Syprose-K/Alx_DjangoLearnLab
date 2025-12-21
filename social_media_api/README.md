@@ -1,5 +1,13 @@
 # Social Media API
 
+## https://your-app-name.herokuapp.com/
+POST /api/accounts/register/
+POST /api/accounts/login/
+GET  /api/feed/
+POST /api/posts/{id}/like/
+GET  /api/notifications/
+
+
 ## Setup
 1. `pip install -r requirements.txt`
 2. `python manage.py migrate`
@@ -67,3 +75,25 @@ Returns recent notifications such as:
 - New followers
 - Likes on posts
 - Comments on posts
+
+
+## Deployment
+
+This project is deployed on Heroku.
+
+### Live URL
+https://your-app-name.herokuapp.com/
+
+### Technologies Used
+- Django
+- Django REST Framework
+- PostgreSQL
+- Gunicorn
+- WhiteNoise
+
+### Deployment Steps
+1. Configure production settings
+2. Set environment variables
+3. Deploy using Heroku Git
+4. Run migrations
+5. Collect static files
